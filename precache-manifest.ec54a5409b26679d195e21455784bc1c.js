@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c7ee983dfca8b487d7a4e705f7bd9030",
+    "revision": "d6dd3b877ce0cc69f7d4b8f33e90e0d1",
     "url": "/News-App/index.html"
   },
   {
-    "revision": "3233f51a082bb9d1da22",
-    "url": "/News-App/static/css/main.fcca2c60.chunk.css"
+    "revision": "b8a1e629530089d55aab",
+    "url": "/News-App/static/css/main.bf73dadc.chunk.css"
   },
   {
     "revision": "2c66837f37e3fb467bbc",
     "url": "/News-App/static/js/2.e1280210.chunk.js"
   },
   {
-    "revision": "3233f51a082bb9d1da22",
+    "revision": "b8a1e629530089d55aab",
     "url": "/News-App/static/js/main.746245c4.chunk.js"
   },
   {

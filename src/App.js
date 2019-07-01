@@ -45,7 +45,7 @@ class Body extends React.Component {
   }
 
 componentDidMount () {
-  const ApiKey = '5541ada8d67e408daa5de792ba9f50f4';
+  const ApiKey = 'd798eacc25c3405e80856f0c5f5ef95a';
 
     fetch('https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey='+ ApiKey)
     .then(res => res.json()).then((top) => {
@@ -99,7 +99,6 @@ componentDidMount () {
 
 render() {
   const { error, isLoaded, topHeadlines, business, technology, sports, entertainment, health, science } = this.state;
-  console.log(Date().toString())
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {

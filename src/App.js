@@ -1,19 +1,19 @@
-import React from 'react';
-import './App.css';
-import Header from './Components/header.js';
-import SideScroll from './Components/SideScroll.js';
-import Grid from './Components/gridHeadlines.js';
-import Footer from './Components/footer.js';
-
+import React from "react";
+import "./App.scss";
+import "./Assets/globaljs.js";
+import Header from "./Components/Header.js";
+import Container from "./Components/Container.js";
+import Stories from "./Components/Stories.js";
+import Footer from "./Components/footer.js";
 
 function App() {
   return (
     <div>
-    <Header />
-    <div className="App">
-    <Body />
-    <Footer />
-    </div>
+      <Header name={'Douglas'} />
+      <div className="App">
+        <Body />
+        <Footer />
+      </div>
     </div>
   );
 }
@@ -25,16 +25,19 @@ class Body extends React.Component {
     super(props, context);
     this.state = {
       isLoaded: false,
+      election: [],
       topHeadlines: [],
-      business: [],
+      money: [],
       technology: [],
       sports: [],
       entertainment: [],
-      health: [],
+      forex: [],
       science: [],
+      fashion: [],
+      business: [],
       show: false,
       activeModal: null
-    }; 
+    };
     this.handleShow = (e, index) => {
       this.setState({ show: true, activeModal: index });
     };
@@ -44,241 +47,404 @@ class Body extends React.Component {
     };
   }
 
-componentDidMount () {
-  const ApiKey = 'd798eacc25c3405e80856f0c5f5ef95a';
+  componentDidMount() {
+    const ApiKey = "d8a9e93882ca427b8bab6f758238b9cb";
+    const date = this.isDays();
+    let category, phrase;
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey='+ ApiKey)
-    .then(res => res.json()).then((top) => {
-        this.setState({
-         isLoaded: true,
-         topHeadlines: top.articles
-      });})
-
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((bus) => {
+    fetch(
+      "https://newsapi.org/v2/everything?q=+us+election+2020&language=en&from=" +
+        date +
+        "&sortBy=publishedAt&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(evry => {
         this.setState({
           isLoaded: true,
-          business: bus.articles
-        });})
+          election: evry.articles
+        });
+      });
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((tech) => {
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&pageSize=40&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(top => {
+        this.setState({
+          isLoaded: true,
+          topHeadlines: top.articles
+        });
+      });
+
+    fetch(
+      "https://newsapi.org/v2/everything?q=+finance&language=en&from=" +
+        date +
+        "&sortBy=relevancy&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(bus => {
+        this.setState({
+          isLoaded: true,
+          money: bus.articles
+        });
+      });
+
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=20&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(tech => {
         this.setState({
           isLoaded: true,
           technology: tech.articles
-        });})
+        });
+      });
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=sports&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((sport) => {
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&category=sports&pageSize=20&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(sport => {
         this.setState({
           isLoaded: true,
           sports: sport.articles
-        });})
+        });
+      });
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=entertainment&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((ent) => {
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&pageSize=20&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(ent => {
         this.setState({
           isLoaded: true,
           entertainment: ent.articles
-        });})
+        });
+      });
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=health&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((health) => {
+    fetch(
+      "https://newsapi.org/v2/everything?q=+forex&language=en&from=" +
+        date +
+        "&sortBy=relevancy&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(forex => {
         this.setState({
           isLoaded: true,
-          health: health.articles
-        });})
+          forex: forex.articles
+        });
+      });
 
-    fetch('https://newsapi.org/v2/top-headlines?country=us&category=science&pageSize=20&apiKey='+ ApiKey)
-    .then(res => res.json()).then((sci) => {
+    fetch(
+      "https://newsapi.org/v2/everything?q=+fashion&language=en&from=" +
+        date +
+        "&sortBy=relevancy&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(fash => {
+        this.setState({
+          isLoaded: true,
+          fashion: fash.articles
+        });
+      });
+
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(bus => {
+        this.setState({
+          isLoaded: true,
+          business: bus.articles
+        });
+      });
+
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=us&category=science&pageSize=20&apiKey=" +
+        ApiKey
+    )
+      .then(res => res.json())
+      .then(sci => {
         this.setState({
           isLoaded: true,
           science: sci.articles
-        });})
+        });
+      });
   }
 
-render() {
-  const { error, isLoaded, topHeadlines, business, technology, sports, entertainment, health, science } = this.state;
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div className="loading">Loading...</div>;
-  } else {
-    return (
-    <div>
+  isDays() {
+    var daysAgo = 1
+    let newDate = new Date();
+    newDate.setDate(newDate.getDate() - daysAgo);
+    let daysInPast = newDate.toISOString().slice(0, 10);
 
-      <h1 id="us" className="subHeader">Top US Headlines</h1>
-        <div className="grid-container">
-          {topHeadlines.slice(0,13).map((item1, index) =>
+    return daysInPast;
+  }
 
-            <Grid key={index} 
-            className={index} 
-            titleA={item1.title} 
-            storyA={item1.urlToImage}
-            time={item1.publishedAt}
-            click={e =>this.handleShow(e, index)} 
-            A={this.state.activeModal === index }
-            B={this.handleHide} 
-            header={item1.description}
-            snippet={item1.content}
-            link={item1.url} 
-            />)}
+  getUser() {
 
-            </div>
+  }
 
+  render() {
+    const {
+      error,
+      isLoaded,
+      election,
+      business,
+      topHeadlines,
+      money,
+      technology,
+      sports,
+      entertainment,
+      forex,
+      science,
+      fashion
+    } = this.state;
 
-      <h1 id="business" className="subHeaderS">Top Business Headlines</h1>
-        <div className="slider-container">
-          {business.map((item2, index) =>
-      
-            <SideScroll key={index + "item2"} 
-            titleB={item2.title} 
-            image={item2.urlToImage} 
-            time={item2.publishedAt} 
-            click={e =>this.handleShow(e, index + "item2")} 
-            A={this.state.activeModal === index + "item2" }
-            B={this.handleHide} 
-            header={item2.description}
-            snippet={item2.content}
-            link={item2.url}  
-            />)}
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div className="loading">Loading...</div>;
+    } else {
+      return (
+        <div>
+          <Container
+            href={"#"}
+            id={"topStories"}
+            backGround
+            textColor
+            categoryTop={"Top Headlines"}
+            categoryBtm={"Top Headlines"}
+            storyHolder={topHeadlines.slice(0, 5).map((item1, index) => (
+              <Stories
+                key={index}
+                image={item1.urlToImage}
+                source={item1.source["name"]}
+                title={item1.title}
+                time={item1.publishedAt}
+                click={e => this.handleShow(e, index + "item1")}
+                open={this.state.activeModal === index + "item1"}
+                close={this.handleHide}
+                snippet={item1.content}
+                link={item1.url}
+              />
+            ))}
+          />
 
-          </div>
+          <Container
+            href={"#"}
+            id={"moreNews"}
+            backGround
+            textColor
+            categoryTop={"News For You"}
+            storyHolder={technology.slice(0, 9).map((item2, index) => (
+              <Stories
+                key={index}
+                image={item2.urlToImage}
+                source={item2.source["name"]}
+                title={item2.title}
+                time={item2.publishedAt}
+                click={e => this.handleShow(e, index + "item2")}
+                open={this.state.activeModal === index + "item2"}
+                close={this.handleHide}
+                snippet={item2.content}
+                link={item2.url}
+              />
+            ))}
+          />
 
-      <h1 className="subHeader"></h1>
-        <div className="grid-container-reverse">
-          {topHeadlines.slice(14,27).map((item3, index) => 
+          <Container
+            href={"#"}
+            id={"Entertainment"}
+            backGround
+            textColor
+            categoryTop={"Entertainment"}
+            categoryBtm={"Entertainment"}
+            storyHolder={entertainment.slice(0, 5).map((item3, index) => (
+              <Stories
+                key={index}
+                image={item3.urlToImage}
+                source={item3.source["name"]}
+                title={item3.title}
+                time={item3.publishedAt}
+                click={e => this.handleShow(e, index + "item3")}
+                open={this.state.activeModal === index + "item3"}
+                close={this.handleHide}
+                snippet={item3.content}
+                link={item3.url}
+              />
+            ))}
+          />
 
-            <Grid key={index + "item3"} 
-            className={index} 
-            titleA={item3.title} 
-            storyA={item3.urlToImage} 
-            time={item3.publishedAt}
-            click={e =>this.handleShow(e, index + "item3")} 
-            A={this.state.activeModal === index + "item3" }
-            B={this.handleHide} 
-            header={item3.description}
-            snippet={item3.content}
-            link={item3.url} 
-            />)}
+          <Container
+            href={"#"}
+            id={"moreNews"}
+            backGround
+            textColor
+            categoryTop={"Money"}
+            categoryBtm={"Money"}
+            storyHolder={money.slice(0, 5).map((item4, index) => (
+              <Stories
+                key={index}
+                image={item4.urlToImage}
+                source={item4.source["name"]}
+                title={item4.title}
+                time={item4.publishedAt}
+                click={e => this.handleShow(e, index + "item4")}
+                open={this.state.activeModal === index + "item4"}
+                close={this.handleHide}
+                snippet={item4.content}
+                link={item4.url}
+              />
+            ))}
+          />
 
-          </div>
+          <Container
+            href={"#"}
+            id={"Election2020"}
+            backGround
+            textColor
+            categoryTop={"Election 2020"}
+            categoryBtm={"Election 2020"}
+            storyHolder={election.slice(0, 5).map((item5, index) => (
+              <Stories
+                key={index}
+                image={item5.urlToImage}
+                source={item5.source["name"]}
+                title={item5.title}
+                time={item5.publishedAt}
+                click={e => this.handleShow(e, index + "item5")}
+                open={this.state.activeModal === index + "item5"}
+                close={this.handleHide}
+                snippet={item5.content}
+                link={item5.url}
+              />
+            ))}
+          />
 
-      <h1 id="technology" className="subHeaderS">Top Technology Headlines</h1>
-        <div className="slider-container">
-          {technology.map((item4, index) =>
-       
-            <SideScroll key={index + "item4"}
-            titleB={item4.title} 
-            image={item4.urlToImage} 
-            time={item4.publishedAt} 
-            click={e =>this.handleShow(e, index + "item4")} 
-            A={this.state.activeModal === index + "item4" }
-            B={this.handleHide} 
-            header={item4.description}
-            snippet={item4.content}
-            link={item4.url}
-            />)}
+          <Container
+            href={"#"}
+            id={"moreNews"}
+            backGround
+            textColor
+            categoryTop={"More Forex For You"}
+            storyHolder={forex.slice(0, 5).map((item6, index) => (
+              <Stories
+                key={index}
+                image={item6.urlToImage}
+                source={item6.source["name"]}
+                title={item6.title}
+                time={item6.publishedAt}
+                click={e => this.handleShow(e, index + "item6")}
+                open={this.state.activeModal === index + "item6"}
+                close={this.handleHide}
+                snippet={item6.content}
+                link={item6.url}
+              />
+            ))}
+          />
 
-          </div>
+          <Container
+            href={"#"}
+            id={"Sports"}
+            backGround
+            textColor
+            categoryTop={"Sports"}
+            categoryBtm={"Sports"}
+            storyHolder={sports.slice(0, 5).map((item7, index) => (
+              <Stories
+                key={index}
+                image={item7.urlToImage}
+                source={item7.source["name"]}
+                title={item7.title}
+                time={item7.publishedAt}
+                click={e => this.handleShow(e, index + "item7")}
+                open={this.state.activeModal === index + "item7"}
+                close={this.handleHide}
+                snippet={item7.content}
+                link={item7.url}
+              />
+            ))}
+          />
 
-      <h1 className="subHeader"></h1>
-        <div className="grid-container">
-          {topHeadlines.slice(28,38).map((item5, index) => 
-            
-            <Grid key={index + "item5"} 
-            className={index} 
-            titleA={item5.title} 
-            storyA={item5.urlToImage} 
-            time={item5.publishedAt} 
-            click={e =>this.handleShow(e, index + "item5")} 
-            A={this.state.activeModal === index + "item5" }
-            B={this.handleHide} 
-            header={item5.description}
-            snippet={item5.content}
-            link={item5.url} 
-            />)}
+          <Container
+            href={"#"}
+            id={"Fashion"}
+            backGround
+            textColor
+            categoryTop={"Fashion"}
+            categoryBtm={"Fashion"}
+            storyHolder={fashion.slice(0, 5).map((item8, index) => (
+              <Stories
+                key={index}
+                image={item8.urlToImage}
+                source={item8.source["name"]}
+                title={item8.title}
+                time={item8.publishedAt}
+                click={e => this.handleShow(e, index + "item8")}
+                open={this.state.activeModal === index + "item8"}
+                close={this.handleHide}
+                snippet={item8.content}
+                link={item8.url}
+              />
+            ))}
+          />
 
-          </div>
+          <Container
+            href={"#"}
+            id={"cover"}
+            backGround
+            textColor
+            categoryTop={"Cover Story"}
+            storyHolder={science.slice(0, 1).map((item9, index) => (
+              <Stories
+                key={index}
+                image={item9.urlToImage}
+                source={item9.source["name"]}
+                title={item9.description}
+                time={item9.publishedAt}
+                click={e => this.handleShow(e, index + "item9")}
+                open={this.state.activeModal === index + "item9"}
+                close={this.handleHide}
+                snippet={item9.content}
+                link={item9.url}
+              />
+            ))}
+          />
 
-      <h1 id="sports" className="subHeaderS">Top Sports Headlines</h1>
-        <div className="slider-container slider-containerS">
-          {sports.map((item6, index) =>
-   
-            <SideScroll key={index + "item6"} 
-            titleB={item6.title} 
-            image={item6.urlToImage} 
-            time={item6.publishedAt} 
-            click={e =>this.handleShow(e, index + "item6")} 
-            A={this.state.activeModal === index + "item6" }
-            B={this.handleHide} 
-            header={item6.description}
-            snippet={item6.content}
-            link={item6.url} 
-            />)}
-
-          </div>
-
-      <h1 id="entertainment" className="subHeader">Top Entertainment Headlines</h1>
-        <div className="grid-container-reverse">
-          {entertainment.slice(0,13).map((item7, index) =>
-
-            <Grid key={index + "item7"} 
-            className={index} 
-            titleA={item7.title} 
-            storyA={item7.urlToImage} 
-            time={item7.publishedAt}
-            click={e =>this.handleShow(e, index + "item7")} 
-            A={this.state.activeModal === index + "item7" }
-            B={this.handleHide} 
-            header={item7.description}
-            snippet={item7.content}
-            link={item7.url} 
-            />)}
-
-            </div>
-
-      <h1 id="health" className="subHeaderS">Top Health Headlines</h1>
-        <div className="slider-container slider-containerS">
-          {health.map((item8, index) =>
-      
-            <SideScroll key={index + "item8"} 
-            titleB={item8.title} 
-            image={item8.urlToImage} 
-            time={item8.publishedAt} 
-            click={e =>this.handleShow(e, index + "item8")} 
-            A={this.state.activeModal === index + "item8" }
-            B={this.handleHide} 
-            header={item8.description}
-            snippet={item8.content}
-            link={item8.url}  
-            />)}
-
-          </div>
-
-      <h1 id="science" className="subHeader">Top Science Headlines</h1>
-        <div className="grid-container">
-          {science.slice(0,13).map((item9, index) =>
-
-            <Grid key={index + "item9"} 
-            className={index} 
-            titleA={item9.title} 
-            storyA={item9.urlToImage} 
-            time={item9.publishedAt}
-            click={e =>this.handleShow(e, index + "item9")} 
-            A={this.state.activeModal === index + "item9" }
-            B={this.handleHide} 
-            header={item9.description}
-            snippet={item9.content}
-            link={item9.url} 
-            />)}
-
-            </div>
-    </div>
+          <Container
+            href={"#"}
+            id={"moreNews"}
+            backGround
+            textColor
+            categoryTop={"Business"}
+            categoryBtm={"Business"}
+            storyHolder={business.slice(0, 7).map((item10, index) => (
+              <Stories
+                key={index}
+                image={item10.urlToImage}
+                source={item10.source["name"]}
+                title={item10.description}
+                time={item10.publishedAt}
+                click={e => this.handleShow(e, index + "item10")}
+                open={this.state.activeModal === index + "item10"}
+                close={this.handleHide}
+                snippet={item10.content}
+                link={item10.url}
+              />
+            ))}
+          />
+        </div>
       );
     }
   }
 }
-
-
-

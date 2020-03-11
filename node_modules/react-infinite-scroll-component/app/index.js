@@ -5,17 +5,21 @@ import { ThresholdUnits, parseThreshold } from "./utils/threshold";
 
 export default class InfiniteScroll extends Component {
   constructor(props) {
-    super();
+    super(props);
+
+    this.lastScrollTop = 0;
+    this.actionTriggered = false;
+
     this.state = {
       showLoader: false,
-      lastScrollTop: 0,
-      actionTriggered: false,
       pullToRefreshThresholdBreached: false
     };
+
     // variables to keep track of pull down behaviour
     this.startY = 0;
     this.currentY = 0;
     this.dragging = false;
+
     // will be populated in componentDidMount
     // based on the height of the pull down element
     this.maxPullDownDistance = 0;
@@ -85,10 +89,10 @@ export default class InfiniteScroll extends Component {
     // do nothing when dataLength and key are unchanged
     if (this.props.key === props.key && this.props.dataLength === props.dataLength) return;
 
+    this.actionTriggered = false;
     // update state when new data was sent in
     this.setState({
       showLoader: false,
-      actionTriggered: false,
       pullToRefreshThresholdBreached: false
     });
   }
@@ -108,7 +112,7 @@ export default class InfiniteScroll extends Component {
   }
 
   onStart(evt) {
-    if (this.state.lastScrollTop) return;
+    if (this.lastScrollTop) return;
 
     this.dragging = true;
     this.startY = evt.pageY || evt.touches[0].pageY;
@@ -194,16 +198,18 @@ export default class InfiniteScroll extends Component {
 
     // return immediately if the action has already been triggered,
     // prevents multiple triggers.
-    if (this.state.actionTriggered) return;
+    if (this.actionTriggered) return;
 
     let atBottom = this.isElementAtBottom(target, this.props.scrollThreshold);
 
     // call the `next` function in the props to trigger the next data fetch
     if (atBottom && this.props.hasMore) {
-      this.setState({ actionTriggered: true, showLoader: true });
+      this.actionTriggered = true;
+      this.setState({ showLoader: true });
       this.props.next();
     }
-    this.setState({ lastScrollTop: target.scrollTop });
+
+    this.lastScrollTop = target.scrollTop;
   }
 
   render() {
@@ -243,10 +249,9 @@ export default class InfiniteScroll extends Component {
                   top: -1 * this.maxPullDownDistance
                 }}
               >
-                {!this.state.pullToRefreshThresholdBreached &&
-                  this.props.pullDownToRefreshContent}
-                {this.state.pullToRefreshThresholdBreached &&
-                  this.props.releaseToRefreshContent}
+                {this.state.pullToRefreshThresholdBreached
+                  ? this.props.releaseToRefreshContent
+                  : this.props.pullDownToRefreshContent}
               </div>
             </div>
           )}

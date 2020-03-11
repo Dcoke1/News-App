@@ -1,19 +1,46 @@
 import React from 'react';
+import "../Assets/globaljs.js";
 import { Navbar, Nav } from 'react-bootstrap';
 
 const Header = (props) => {
+
+	const timeOfDay = () => {
+		let time = new Date().getHours();
+		let greeting;
+			switch (true) {
+			case (time < 4):
+			    return greeting = "Sup"
+			    break;
+			case (time > 3 && time < 12):
+			    return greeting = "Morning"
+			    break;
+			case (time > 11 && time < 17):
+			    return greeting = "Afternoon"
+			    break;
+			case (time > 16 && time < 21):
+			    return greeting = "Evening"
+			    break;
+			case (time > 20 && time < 25):
+			    return greeting = "GoodNight"
+			    break;
+			default:
+			    return greeting = "Welcome"
+			    break;
+		}
+	};
+
 	return(
-	<Navbar bg="dark" variant="dark" sticky="top">
-			<Nav className="mr-auto">
-				<Nav.Link className="link" href="#us"><i className="fas fa-flag-usa"></i>&nbsp;US</Nav.Link>
-				<Nav.Link className="link" href="#business"><i className="fas fa-briefcase"></i>&nbsp;Business</Nav.Link>
-				<Nav.Link className="link" href="#technology"><i className="fas fa-laptop-code"></i>&nbsp;Technology</Nav.Link>
-				<Nav.Link className="link" href="#sports"><i className="fas fa-basketball-ball"></i>&nbsp;Sports</Nav.Link>
-				<Nav.Link className="link" href="#entertainment"><i className="fas fa-theater-masks"></i>&nbsp;Entertainment</Nav.Link>
-				<Nav.Link className="link" href="#health"><i className="fas fa-heartbeat"></i>&nbsp;Health</Nav.Link>
-				<Nav.Link className="linkEnd" href="#science"><i className="fas fa-microscope"></i>&nbsp;Science</Nav.Link>&nbsp;
-			</Nav>
-	</Navbar>
+		<Navbar bg="dark" variant="dark" sticky="top">
+				<Nav>
+					<aside className="greeting">
+						<span>{timeOfDay()}, {props.name}</span>
+					</aside>
+
+					<aside className="nav-search">
+						<input type='text' placeHolder='Search' />
+					</aside>
+				</Nav>
+		</Navbar>
 	)
 }
 

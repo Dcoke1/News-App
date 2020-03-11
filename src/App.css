@@ -1,5 +1,17 @@
+
+.sidenav---sidenav---_2tBP {
+ display: none;
+}
+
 body, html{
 background: #f0f0f0;
+/*font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'Lora', serif; 
+font-family: 'Frank Ruhl Libre', serif; 
+font-family: 'Playfair Display', serif;
+font-family: 'Source Sans Pro', sans-serif;*/
+/*font-family: 'Old Standard TT', serif;*/
+font-family: 'Nunito', sans-serif; 
 }
 .App{
 overflow: auto;
@@ -7,7 +19,7 @@ overflow: auto;
 }
 /*==============Background Video Styles====================*/
 
-.video-container{
+.top-container{
 width: 100%;
 height: auto;
 display: flex;
@@ -53,25 +65,10 @@ opacity: .8;
 
 /*=============End Video Fade In Styles=================*/
 
-#us{
-margin-top: 2.8rem;
-}
-.color-overlay{
-position: absolute;
-top: 0;
-left: 0;
-background-color: #007Fbb;
-width: 100%;
-height: ;
-opacity: 0.1;
-}
-
-/*==============End Background Video Styles====================*/
-
 /*==============Navbar  Styles====================*/
 
 .navbar{
-margin-bottom: -5.5rem;
+width: 100%;
 opacity: .98;
 font-family: News Cycle;
 justify-content: center;
@@ -115,6 +112,14 @@ width: 100%;
 line-height: 1.8rem;
 }
 
+.modal-dialog, .modal-90w {
+box-shadow: 2px 2px 10px 3px rgba(245, 255, 255,.2);
+}
+
+.modal-content {
+background: #f0f0f0;
+}
+
 /*==============End Modal  Styles====================*/
 
 /*==============Grid Styles====================*/
@@ -142,12 +147,13 @@ background-color: hsla(0,0%,90.2%,.6);
 .grid-container, .grid-container-reverse {
 display: grid;
 position: relative;
-grid-gap: 1px;
+padding: 10px;
+grid-gap: 10px;
 grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
 grid-auto-rows: 400px;
 grid-auto-flow: dense;
 overflow: none;
-background: #343a40;
+background: ;
 }
 .grid-container-reverse {
 direction: rtl;
@@ -159,9 +165,38 @@ position: relative;
 display: flex;
 justify-content: center;
 }
-h1{
-text-align: center;
+
+h1 {
+  overflow: hidden;
+  text-align: center;
+  letter-spacing: 3px;
 }
+
+h1:before,
+h1:after {
+  background-color: rgba(0,0,0,.2);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+h1:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+h1:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 [class="0"] { grid-column: span 1; }
 [class="1"] { grid-column: span 2;grid-row: span 1; }
 [class="2"] { grid-column: span 2; grid-row: span 2; }
@@ -175,16 +210,17 @@ text-align: center;
 [class="10"] { grid-column: span 2; }
 [class="11"] { grid-column: span 3; }
 [class="12"] { grid-column: span 1;grid-row: span 1; }
-[class="13"] { grid-column: span 1;grid-row: span 1; }
+[class="13"] { grid-column: span 1;grid-row: span 1; } 
 
 /*==============End Grid Styles====================*/
 
 /*==============Heading Styles====================*/
 
 .subHeader, .subHeaderS{
-padding-top: 3rem;
+padding-top: 2.5rem;
 margin-left: 5px;
 font-family: Neuton;
+margin: 0px 10px;
 }
 .subHeaderS{
 text-align: center;
@@ -199,7 +235,7 @@ flex-direction: row;
 position: relative;
 width: 100%;
 margin-bottom: -2.5rem;
-padding-left: 10px;
+padding-left: 5px;
 overflow: auto;
 -webkit-overflow-scrolling: touch;
 }
@@ -212,7 +248,7 @@ display: flex;
 flex-direction: column-reverse;
 align-items: baseline;
 text-align: center;
-margin-right: 10px;
+margin-right: 0px;
 -webkit-overflow-scrolling: touch;
 }
 .carousel-cell img {
@@ -220,6 +256,7 @@ width: 400px;
 height: 25rem;
 object-fit: cover;
 position: relative;
+margin-right: 10px;
 -webkit-overflow-scrolling: touch;
 }
 
@@ -253,7 +290,7 @@ color: lightgrey;
 align-self: flex-end;
 font-size: 12px;
 font-weight: 500;
-text-shadow: 2px 1px black;
+text-shadow: 1px 1px black;
 }
 .timeStampR{
 direction: ltr;
@@ -345,9 +382,14 @@ top: 80%;
 width: 100%;
 height: 100%;
 object-fit: cover;
-background-image: url(https://unfoxnews.com/upload/noimage.jpg);
 -webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
 box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+ &:before {
+background-image: url(./Assets/Images/noimage.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
 }
 .footer {
 height: 5rem;
@@ -529,6 +571,9 @@ grid-auto-rows: 200px;
 .navbar{
 font-size: 12px;
 }
+.linkEnd {
+margin-right: 10px;
+}
 .title{
 font-size: 9px;
 padding: .1px;
@@ -559,6 +604,7 @@ display: none;
 }
 .navbar{
 overflow: auto;
+margin-bottom: -3rem;
 -webkit-overflow-scrolling: touch;
 }
 .nav-link{
@@ -578,12 +624,13 @@ background-color: #f0f0f0 !important;
 }
 .subHeader, .subHeaderS {
 font-size: 32px;
+padding-top: 3.5rem;
 }
 .grid-container, .grid-container-reverse {
 grid-auto-rows: 200px;
 grid-gap: 10px;
 background: transparent;
-margin: 15px 15px -45px 15px;
+margin: 15px 0px -45px 0px;
 }
 .slider-container{
 margin-bottom: -2.5rem;
@@ -624,6 +671,7 @@ font-size: 16px;
 .carousel-cell img {
 width: 300px;
 height: 300px;
+border-radius: 5px;
 }
 p{
 font-size: 16px;
@@ -633,5 +681,25 @@ margin-top: 1rem;
 .footer{
 margin-top: 3.5rem;
 }
+.fa-flag-usa {
+  color: darkblue;
 }
-
+.fa-briefcase {
+  color: darkgreen;
+}
+.fa-laptop-code {
+  color: darkkhaki;
+}
+.fa-basketball-ball {
+  color: darkorange;
+}
+.fa-theater-masks {
+  color: darkslateblue;
+}
+.fa-heartbeat {
+  color: darkred;
+}
+.fa-microscope {
+  color: darkslategrey;
+}
+}

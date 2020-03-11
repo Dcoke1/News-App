@@ -48,7 +48,7 @@ class Body extends React.Component {
   }
 
   componentDidMount() {
-    const ApiKey = "d8a9e93882ca427b8bab6f758238b9cb";
+    const ApiKey = "b80d690f96d14fd8968dcd907c3d3307";
     const date = this.isDays();
     let category, phrase;
 

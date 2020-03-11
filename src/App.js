@@ -48,7 +48,8 @@ class Body extends React.Component {
   }
 
   componentDidMount() {
-    const ApiKey = "b80d690f96d14fd8968dcd907c3d3307";
+    const ApiKey = "e359ddf642c54d8696cd2ec524408d32";
+
     const date = this.isDays();
     let category, phrase;
 
@@ -217,6 +218,7 @@ class Body extends React.Component {
     } else {
       return (
         <div>
+        
           <Container
             href={"#"}
             id={"topStories"}
@@ -443,6 +445,7 @@ class Body extends React.Component {
               />
             ))}
           />
+
         </div>
       );
     }

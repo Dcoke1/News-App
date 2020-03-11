@@ -37,7 +37,7 @@ const Header = (props) => {
 					</aside>
 
 					<aside className="nav-search">
-						<input type='text' placeHolder='Search' />
+						<input type='text' placeHolder='Search coming soon!' />
 					</aside>
 				</Nav>
 		</Navbar>

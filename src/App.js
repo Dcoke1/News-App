@@ -6,10 +6,11 @@ import Container from "./Components/Container.js";
 import Stories from "./Components/Stories.js";
 import Footer from "./Components/footer.js";
 
+
 function App() {
   return (
     <div>
-      <Header name={'Douglas'} />
+      <Header />
       <div className="App">
         <Body />
         <Footer />
@@ -48,10 +49,10 @@ class Body extends React.Component {
   }
 
   componentDidMount() {
-    const ApiKey = "e359ddf642c54d8696cd2ec524408d32";
+    const ApiKey = process.env.REACT_APP_NEWS_API_KEY;
 
     const date = this.isDays();
-    let category, phrase;
+    //let category, phrase;
 
     fetch(
       "https://newsapi.org/v2/everything?q=+us+election+2020&language=en&from=" +
@@ -183,7 +184,7 @@ class Body extends React.Component {
   }
 
   isDays() {
-    var daysAgo = 1
+    let daysAgo = 1
     let newDate = new Date();
     newDate.setDate(newDate.getDate() - daysAgo);
     let daysInPast = newDate.toISOString().slice(0, 10);
@@ -191,9 +192,6 @@ class Body extends React.Component {
     return daysInPast;
   }
 
-  getUser() {
-
-  }
 
   render() {
     const {

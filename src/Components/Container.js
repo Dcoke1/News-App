@@ -12,8 +12,10 @@ const Container = (props) => {
 	            </h1>
 	          </div>
 	          	{props.storyHolder}
-	          	<a href={props.href}>
-	            	<span>More <strong className={props.textColor}>{props.categoryBtm} News</strong></span>
+	          	<a className="more" href={props.href}>
+	            	<span>More <strong className={props.textColor}> {props.categoryBtm} News</strong>
+	            	<span className="fa fa-arrow-circle-right" aria-hidden="true"></span>
+	            	</span>
 	            </a>
 	        </div>
 	    </LazyLoad> 

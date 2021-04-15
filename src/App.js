@@ -6,6 +6,8 @@ import Container from "./Components/Container.js";
 import Stories from "./Components/Stories.js";
 import Footer from "./Components/footer.js";
 
+var yahooFinance = require('yahoo-finance');
+
 
 function App() {
   return (
@@ -192,6 +194,13 @@ class Body extends React.Component {
     return daysInPast;
   }
 
+  /*yahooFinance.quote({
+  symbol: 'AAPL',
+  modules: [ 'price', 'summaryDetail' ] // see the docs for the full list
+}, function (err, quotes) {
+  // ...
+});*/
+
 
   render() {
     const {
@@ -215,7 +224,7 @@ class Body extends React.Component {
       return <div className="loading">Loading...</div>;
     } else {
       return (
-        <div>
+        <div className="body_container">
         
           <Container
             href={"#"}

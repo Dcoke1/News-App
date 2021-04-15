@@ -1,5 +1,6 @@
-body, html {
-  background: #f0f0f0;
+body, html, a {
+  background: #f0f0f0 !important;
+  color: black;
   /*font-family: 'IBM Plex Sans', sans-serif;
   font-family: 'Lora', serif; 
   font-family: 'Frank Ruhl Libre', serif; 
@@ -8,10 +9,31 @@ body, html {
   /*font-family: 'Old Standard TT', serif;*/
   font-family: 'Nunito', sans-serif;
 }
+/*==============Container Colors====================*/
+.red {
+  background: rgb(255,252,252);
+  background: linear-gradient(180deg, rgba(255,252,252,1) 25%, 
+  rgba(255,246,246,1) 50%, rgba(255,243,243,1) 75%, rgba(255,223,223,1) 100%);
+}
+.blue {
+  background: rgb(252,254,255);
+  background: linear-gradient(180deg, rgba(252,254,255,1) 25%,
+  rgba(246,252,255,1) 50%, rgba(243,251,255,1) 75%, rgba(223,244,255,1) 100%);
+}
+.green {
+  background: rgb(255,254,254);
+  background: linear-gradient(180deg, rgba(255,254,254,1) 0%, 
+  rgba(242,255,242,1) 25%, rgba(233,255,236,1) 50%, rgba(223,255,228,1) 75%, rgba(217,255,223,1) 100%);
+}
+.dark {
+  background: rgb(50, 56, 77);
+}
+
 .App {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+
 /*==============Background Video Styles====================*/
 
 .top-container {
@@ -108,7 +130,6 @@ body, html {
 
 /*==============End Modal  Styles====================*/
 
-/*==============Grid Styles====================*/
 .loading {
   display: flex;
   justify-content: center;
@@ -177,24 +198,23 @@ label {
 .userName {
   text-transform: capitalize;
 }
-
-/*==============End Grid Styles====================*/
-
-/*==============Heading Styles====================*/
+.more {
+  strong{
+    margin: 0 3.5px;
+  }
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
 
 .subHeader {
   font-family: Neuton;
   font-size: 28px;
   padding-top: 1.5rem;
 }
-/*==============End Heading Styles====================*/
 
-
-
-/*==================Image overlay===========================*/
-
-
-/*==================End Image overlay===========================*/
 .footer {
   height: 5rem;
   padding: 5px;
@@ -213,14 +233,9 @@ label {
   color: #006BFF;
 }
 
-/*===================Media Queries ===============*/
-
-
 /*===================Mobile Media Queries ===============*/
 
-@media screen and (max-width: 800px) {
   .top-container {
-    flex-direction: column;
     align-items: baseline;
     padding: .8rem;
   }
@@ -242,6 +257,10 @@ label {
   h1:before, h1:after {
     height: 0px;
   }
+  .body_container {
+    max-width: 800px;
+    margin: auto;
+  }
   #topStories,
   #cover, 
   #moreNews, 
@@ -257,16 +276,12 @@ label {
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.18);
     -webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.18);
       a {
-      color: black;
       margin: 0 0 0 auto;
-      padding: .5rem .8rem;
+      padding: 1rem 0 .5rem .8rem;
     }
   }
 
   #topStories {
-    background: rgb(255,252,252);
-    background: linear-gradient(180deg, rgba(255,252,252,1) 25%, 
-    rgba(255,246,246,1) 50%, rgba(255,243,243,1) 75%, rgba(255,223,223,1) 100%);
         .article {
           &:nth-child(2) {
             width: 100%;
@@ -317,9 +332,6 @@ label {
   }
 
   #Entertainment {
-    background: rgb(252,254,255);
-    background: linear-gradient(180deg, rgba(252,254,255,1) 25%,
-    rgba(246,252,255,1) 50%, rgba(243,251,255,1) 75%, rgba(223,244,255,1) 100%);
       .article {
         &:nth-child(2), &:nth-child(9) {
           width: 100%;
@@ -342,9 +354,6 @@ label {
       }
   }
   #Election2020 {
-    background: rgb(255,252,252);
-    background: linear-gradient(180deg, rgba(255,252,252,1) 25%, 
-    rgba(255,246,246,1) 50%, rgba(255,243,243,1) 75%, rgba(255,223,223,1) 100%);
       .article {
           &:nth-child(2), &:nth-child(7), &:nth-child(10) {
             width: 100%;
@@ -363,10 +372,8 @@ label {
           }
       }
   }
+  
   #Sports {
-    background: rgb(255,252,252);
-    background: linear-gradient(180deg, rgba(255,252,252,1) 25%, 
-    rgba(255,246,246,1) 50%, rgba(255,243,243,1) 75%, rgba(255,223,223,1) 100%);
       .article {
           &:nth-child(2) {
             width: 100%;
@@ -391,10 +398,8 @@ label {
           }
         }
   }
+
   #Fashion{
-    background: rgb(255,252,252);
-    background: linear-gradient(180deg, rgba(255,252,252,1) 25%, 
-    rgba(255,246,246,1) 50%, rgba(255,243,243,1) 75%, rgba(255,223,223,1) 100%);
       .article {
         &:nth-child(2), &:nth-child(3), 
         &:nth-child(4), &:nth-child(5),
@@ -414,6 +419,7 @@ label {
           }
         }
   }
+
   #cover {
     h1 {
       text-align: center;
@@ -473,4 +479,6 @@ label {
   .bold-red {
     color: #d11111;
   }
-}
+  .fa-newspaper:before {
+    margin-right: 3.5px;
+  }
